@@ -1,6 +1,6 @@
 Roba che manca:
 - Game over
-- Vittoria e cambio scena
+- Cambio scena alla vittoria
 - Rumori del drago
 - Rumori del proiettile
 - Rumori del cannone
