@@ -8,14 +8,17 @@ public class Character : MonoBehaviour
     public float JumpForce;
     public float JumpMovementAmount;
 
-    public GameObject fire;
-    public Transform hotSpot;
+    public GameObject FirePrefab;
+    public Transform FireSpawn;
+
+    public float FireTime;
 
     float timer;
 
     Rigidbody2D rigid;
     Animator anim;
 
+    CharacterAction previousAction;
     CharacterAction _currentAction = CharacterAction.None;
     CharacterAction currentAction
     {
@@ -26,7 +29,7 @@ public class Character : MonoBehaviour
             _currentAction = value;
         }
     }
-    CharacterAction previousAction;
+
     int sideMovement;
 
     bool _isGrounded = false;
@@ -63,6 +66,8 @@ public class Character : MonoBehaviour
 	
 	void FixedUpdate ()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            currentAction = CharacterAction.Fire;
         ChooseAction(currentAction);
     }
 
@@ -72,9 +77,11 @@ public class Character : MonoBehaviour
         {
             case CharacterAction.GoRight:
                 Move(1);
+                FireSpawn.position = new Vector3(Mathf.Abs(FireSpawn.position.x), FireSpawn.position.y, FireSpawn.position.z);
                 break;
             case CharacterAction.GoLeft:
                 Move(-1);
+                FireSpawn.position = new Vector3(-FireSpawn.position.x, FireSpawn.position.y, FireSpawn.position.z);
                 break;
             case CharacterAction.Jump:
                 Jump();
@@ -83,12 +90,18 @@ public class Character : MonoBehaviour
                 Fire();
                 break;
         }
+
+        anim.SetInteger("AnimState", (int)currentAction);
     }
 
     void Move(int _direction)
     {
-        sideMovement = _direction;
-        rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        if (isGrounded)
+        {
+            sideMovement = _direction;
+            //rigid.velocity = rigid.velocity + Vector2.right * (_direction * MovementSpeed);
+            rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        }
     }
 
     void Jump()
@@ -99,10 +112,9 @@ public class Character : MonoBehaviour
 
     void Fire()
     {
-        GameObject newfire = Instantiate(fire, hotSpot.position, hotSpot.rotation);
-        Destroy(newfire, 0.5f);
+        GameObject newfire = Instantiate(FirePrefab, FireSpawn.position, FireSpawn.rotation);
+        Destroy(newfire, FireTime);
         currentAction = previousAction;
-
     }
 
     CollisionDirection DetectCollisionSide(Collider2D _collider)
