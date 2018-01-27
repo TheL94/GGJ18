@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class Character : MonoBehaviour
 {
     public float MovementSpeed;
@@ -158,11 +158,6 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.LoadScene("Start", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
