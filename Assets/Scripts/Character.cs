@@ -16,9 +16,9 @@ public class Character : MonoBehaviour
 	
 	void FixedUpdate ()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
             Move(Vector2.left);
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
             Move(Vector2.right);
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();        
@@ -26,8 +26,7 @@ public class Character : MonoBehaviour
 
     void Move(Vector2 _direction)
     {
-        //rigid.MovePosition(_direction * MovementSpeed);
-        transform.Translate(_direction * MovementSpeed);
+        rigid.MovePosition(rigid.position + (_direction * MovementSpeed));
     }
 
     void Jump()
