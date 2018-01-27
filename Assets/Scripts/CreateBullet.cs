@@ -22,7 +22,7 @@ public class CreateBullet : MonoBehaviour
 
     void OnMouseDown()
     {
-        Object.Instantiate(bullet, hotSpot.position, Quaternion.identity);
+        Object.Instantiate(bullet, hotSpot.position, hotSpot.rotation);
     }
 
 }
