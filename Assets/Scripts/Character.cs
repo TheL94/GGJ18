@@ -7,8 +7,6 @@ public class Character : MonoBehaviour
     public float MovementSpeed;
     public float JumpForce;
     public float JumpMovementAmount;
-    //
-    public Transform hotSpotF;
 
     float timer;
 
@@ -37,12 +35,6 @@ public class Character : MonoBehaviour
     }
 
     #region API
-    public void TransmitAction(CharacterAction _action)
-    {
-        if (isGrounded)
-            currentAction = _action;
-    }
-
     public void Kill()
     {
 
@@ -63,9 +55,7 @@ public class Character : MonoBehaviour
             currentAction = CharacterAction.GoLeft;
         else if (Input.GetKeyDown(KeyCode.D))
             currentAction = CharacterAction.GoRight;
-        /////
-        else if (Input.GetKeyDown(KeyCode.F))
-            currentAction = CharacterAction.GoRight;
+
         ChooseAction(currentAction);
     }
 
@@ -83,10 +73,6 @@ public class Character : MonoBehaviour
                 break;
             case CharacterAction.Jump:
                 Jump();
-                break;
-            //
-            case CharacterAction.Fire:
-                Firing();
                 break;
         }
     }
@@ -121,10 +107,15 @@ public class Character : MonoBehaviour
             isGrounded = false;
     }
 
-    //
-    private void Firing()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Object.Instantiate(Fire, hotSpotF.position, Quaternion.identity);
+        
+    }
+
+    void DetectCollisionSide(Collision2D _collision)
+    {
+        Vector3 points = _collision.contacts[0].point;
+        
     }
 }
 
@@ -133,8 +124,5 @@ public enum CharacterAction
     None = -1,
     GoRight = 0,
     GoLeft = 1,
-    Jump = 2,
-
-    //
-    Fire = 3
+    Jump = 2
 }

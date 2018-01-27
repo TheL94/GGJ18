@@ -13,4 +13,20 @@ public class LethalObstacle : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {        
+        GameObject collidingObject = collider.gameObject;        
+        Death death = collidingObject.GetComponent<Death>();
+        if (death)
+        {
+            collidingObject.GetComponent<Collider2D>().enabled = false;
+            collidingObject.GetComponent<Death>().enabled = true;
+        }
+        else
+        {
+            Debug.Log("Missing Death component: simply destroy " + collidingObject);
+            Destroy(collidingObject);
+        }
+    }
 }
