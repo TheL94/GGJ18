@@ -52,9 +52,9 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
             currentAction = CharacterAction.Jump;
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A))
             currentAction = CharacterAction.GoLeft;
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
             currentAction = CharacterAction.GoRight;
 
         ChooseAction(currentAction);
