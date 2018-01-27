@@ -55,6 +55,8 @@ public class Character : MonoBehaviour
             currentAction = CharacterAction.GoLeft;
         else if (Input.GetKeyDown(KeyCode.D))
             currentAction = CharacterAction.GoRight;
+        else if (Input.GetKeyDown(KeyCode.F))
+            currentAction = CharacterAction.Fire;
 
         ChooseAction(currentAction);
     }
@@ -74,6 +76,9 @@ public class Character : MonoBehaviour
             case CharacterAction.Jump:
                 Jump();
                 break;
+            case CharacterAction.Fire:
+                Fire();
+                break;
         }
     }
 
@@ -87,6 +92,11 @@ public class Character : MonoBehaviour
     {
         if(isGrounded)
             rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
+    }
+
+    void Fire()
+    {
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,5 +134,6 @@ public enum CharacterAction
     None = -1,
     GoRight = 0,
     GoLeft = 1,
-    Jump = 2
+    Jump = 2,
+    Fire = 3
 }
