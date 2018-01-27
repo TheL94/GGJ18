@@ -31,12 +31,18 @@ public class Audio : MonoBehaviour {
 
     public static void Play(Music song)
     {
-        GetInstance().PlayMusic(song);
+        if (GetInstance())
+        {
+            GetInstance().PlayMusic(song);
+        }
     }
 
     public static void Play(Sfx sfx)
     {
-        GetInstance().PlaySfx(sfx);
+        if (GetInstance())
+        {
+            GetInstance().PlaySfx(sfx);
+        }
     }
 
     void Awake()

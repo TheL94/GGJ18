@@ -150,17 +150,17 @@ public class Character : MonoBehaviour
         currentAction = previousAction;
     }
 
-    CollisionDirection DetectCollisionSide(Collider2D _collider)
+    CollisionDirection DetectCollisionSide(Collider2D bullet)
     {
         CollisionDirection direction = CollisionDirection.None;
 
-        if(_collider.transform.up == Vector3.right)
+        if(bullet.transform.up == Vector3.right)
             direction = CollisionDirection.FromLeft;
-        else if (_collider.transform.up == Vector3.left)
+        else if (bullet.transform.up == Vector3.left)
             direction = CollisionDirection.FromRight;
-        else if (_collider.transform.up == Vector3.up)
+        else if (bullet.transform.up == Vector3.up)
             direction = CollisionDirection.FromDown;
-        else if (_collider.transform.up == Vector3.down)
+        else if (bullet.transform.up == Vector3.down)
             direction = CollisionDirection.FromUp;
         else
             direction = CollisionDirection.None;
@@ -168,11 +168,23 @@ public class Character : MonoBehaviour
         return direction;
     }
 
+    private void SetGrounded(Collision2D groundCollision)
+    {
+        foreach (ContactPoint2D contact in groundCollision.contacts)
+        {
+            if (contact.normal.y > 0)
+            {
+                isGrounded = true;
+                return;
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-        { 
-            isGrounded = true;
+        {
+            SetGrounded(collision);
         }
         else if (collision.gameObject.tag == "Wall")
         {
@@ -198,7 +210,9 @@ public class Character : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-            isGrounded = true;
+        {
+            SetGrounded(collision);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
