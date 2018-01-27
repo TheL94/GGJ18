@@ -27,8 +27,10 @@ public class Character : MonoBehaviour
             {
                 if(sideMovement == 1)
                     currentAction = CharacterAction.GoRight;
-                if (sideMovement == -1)
+                else if (sideMovement == -1)
                     currentAction = CharacterAction.GoLeft;
+                else
+                    currentAction = CharacterAction.Idle;
             }
             _isGrounded = value;
         }
@@ -92,22 +94,33 @@ public class Character : MonoBehaviour
     {
         CollisionDirection direction = CollisionDirection.None;
 
-        Vector2 difference = transform.position - _collider.transform.position;
+        //Vector2 difference = transform.position - _collider.transform.position;
         
-        if(Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
-        {
-            if (difference.x > 0)
-                direction = CollisionDirection.FromLeft;
-            else
-                direction = CollisionDirection.FromRight;
-        }
+        //if(Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
+        //{
+        //    if (difference.x > 0)
+        //        direction = CollisionDirection.FromLeft;
+        //    else
+        //        direction = CollisionDirection.FromRight;
+        //}
+        //else
+        //{
+        //    if (difference.y > 0)
+        //        direction = CollisionDirection.FromDown;
+        //    else
+        //        direction = CollisionDirection.FromUp;
+        //}
+
+        if(_collider.transform.up == Vector3.right)
+            direction = CollisionDirection.FromLeft;
+        else if (_collider.transform.up == Vector3.left)
+            direction = CollisionDirection.FromRight;
+        else if (_collider.transform.up == Vector3.up)
+            direction = CollisionDirection.FromDown;
+        else if (_collider.transform.up == Vector3.down)
+            direction = CollisionDirection.FromUp;
         else
-        {
-            if (difference.y > 0)
-                direction = CollisionDirection.FromDown;
-            else
-                direction = CollisionDirection.FromUp;
-        }
+            direction = CollisionDirection.None;
 
 
         Debug.Log(direction);
@@ -169,8 +182,9 @@ public enum CollisionDirection
 public enum CharacterAction
 {
     None = -1,
-    GoRight = 0,
-    GoLeft = 1,
-    Jump = 2,
-    Fire = 3
+    Idle = 0,
+    GoRight = 1,
+    GoLeft = 2,
+    Jump = 3,
+    Fire = 4
 }
