@@ -6,8 +6,8 @@ public class CreateBullet : MonoBehaviour
 {
     public Bullet bullet;
     public Transform hotSpot;
-
-
+    public float timer = 0.5f;
+    private float counter;
     // Use this for initialization
     void Start()
     {
@@ -17,12 +17,18 @@ public class CreateBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (counter < 100)
+            counter += Time.deltaTime;
     }
 
     void OnMouseDown()
     {
-        Object.Instantiate(bullet, hotSpot.position, hotSpot.rotation);
+        if (counter >= timer)
+        {
+            //azione
+            Instantiate(bullet, hotSpot.position, hotSpot.rotation);
+            counter = 0;
+        }
     }
 
 }
