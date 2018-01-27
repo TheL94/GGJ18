@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class Character : MonoBehaviour
 {
     public float MovementSpeed;
@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     public GameObject FirePrefab;
     public Transform FireSpawn;
 
-    public float FireTime;
+    public float FireTime = 0.5f;
 
     float timer;
 
@@ -80,13 +80,13 @@ public class Character : MonoBehaviour
         {
             case CharacterAction.GoRight:
                 Move(1);
-                FireSpawn.position = new Vector3(Mathf.Abs(FireSpawn.position.x), FireSpawn.position.y, FireSpawn.position.z);
+                FireSpawn.localPosition = new Vector3(Mathf.Abs(FireSpawn.localPosition.x), FireSpawn.localPosition.y, FireSpawn.localPosition.z);
                 if(!spriteRend.flipX)
                     spriteRend.flipX = true;
                 break;
             case CharacterAction.GoLeft:
                 Move(-1);
-                FireSpawn.position = new Vector3(-FireSpawn.position.x, FireSpawn.position.y, FireSpawn.position.z);
+                FireSpawn.localPosition = new Vector3(-Mathf.Abs(FireSpawn.localPosition.x), FireSpawn.localPosition.y, FireSpawn.localPosition.z);
                 if (spriteRend.flipX)
                     spriteRend.flipX = false;
                 break;
@@ -106,7 +106,6 @@ public class Character : MonoBehaviour
         if (isGrounded)
         {
             sideMovement = _direction;
-            //rigid.velocity = rigid.velocity + Vector2.right * (_direction * MovementSpeed);
             rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
         }
     }
@@ -145,7 +144,7 @@ public class Character : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-        {
+        { 
             isGrounded = true;
         }
         else if (collision.gameObject.tag == "Wall")
@@ -161,7 +160,6 @@ public class Character : MonoBehaviour
         }
     }
 
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -172,11 +170,6 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
-    }
-
-    private void OnDestroy()
-    {
-        // SceneManager.LoadScene("Start", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
