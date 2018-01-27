@@ -12,3 +12,6 @@ Roba che manca:
 - Animazioni del proiettile
 - Distruzione degli ostacoli
 - Drago non plana
+
+Bachi:
+- Start is loading
