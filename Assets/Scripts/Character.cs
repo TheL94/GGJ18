@@ -17,6 +17,9 @@ public class Character : MonoBehaviour
 
     Rigidbody2D rigid;
     Animator anim;
+    SpriteRenderer spriteRend;
+
+    bool spriteFlip;
 
     CharacterAction previousAction;
     CharacterAction _currentAction = CharacterAction.None;
@@ -55,12 +58,19 @@ public class Character : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
     }
 
     void FixedUpdate ()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F))
             currentAction = CharacterAction.Fire;
+        if (Input.GetKeyDown(KeyCode.D))
+            currentAction = CharacterAction.GoRight;
+        if (Input.GetKeyDown(KeyCode.A))
+            currentAction = CharacterAction.GoLeft;
+        if (Input.GetKeyDown(KeyCode.Space))
+            currentAction = CharacterAction.Jump;
         ChooseAction(currentAction);
     }
 
@@ -71,10 +81,14 @@ public class Character : MonoBehaviour
             case CharacterAction.GoRight:
                 Move(1);
                 FireSpawn.position = new Vector3(Mathf.Abs(FireSpawn.position.x), FireSpawn.position.y, FireSpawn.position.z);
+                if(!spriteRend.flipX)
+                    spriteRend.flipX = true;
                 break;
             case CharacterAction.GoLeft:
                 Move(-1);
                 FireSpawn.position = new Vector3(-FireSpawn.position.x, FireSpawn.position.y, FireSpawn.position.z);
+                if (spriteRend.flipX)
+                    spriteRend.flipX = false;
                 break;
             case CharacterAction.Jump:
                 Jump();
@@ -145,6 +159,7 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
     }
+
     private void OnDestroy()
     {
         SceneManager.LoadScene("Start", LoadSceneMode.Single);
