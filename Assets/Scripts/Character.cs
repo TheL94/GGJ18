@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
     public float MovementSpeed;
     public float JumpForce;
     public float JumpMovementAmount;
+    //
+    public Transform hotSpotF;
 
     float timer;
 
@@ -61,7 +63,9 @@ public class Character : MonoBehaviour
             currentAction = CharacterAction.GoLeft;
         else if (Input.GetKeyDown(KeyCode.D))
             currentAction = CharacterAction.GoRight;
-
+        /////
+        else if (Input.GetKeyDown(KeyCode.F))
+            currentAction = CharacterAction.GoRight;
         ChooseAction(currentAction);
     }
 
@@ -79,6 +83,10 @@ public class Character : MonoBehaviour
                 break;
             case CharacterAction.Jump:
                 Jump();
+                break;
+            //
+            case CharacterAction.Fire:
+                Firing();
                 break;
         }
     }
@@ -112,6 +120,12 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
     }
+
+    //
+    private void Firing()
+    {
+        Object.Instantiate(Fire, hotSpotF.position, Quaternion.identity);
+    }
 }
 
 public enum CharacterAction
@@ -119,5 +133,8 @@ public enum CharacterAction
     None = -1,
     GoRight = 0,
     GoLeft = 1,
-    Jump = 2
+    Jump = 2,
+
+    //
+    Fire = 3
 }

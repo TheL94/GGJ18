@@ -22,4 +22,9 @@ public class Bullet : MonoBehaviour {
         Debug.Log("Out of screen: destroyed");
         Destroy(gameObject);
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+
+    }
 }
