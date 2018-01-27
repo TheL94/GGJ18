@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LethalObstacle : MonoBehaviour {
 
+    public string[] victimTags;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +19,21 @@ public class LethalObstacle : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider)
     {        
         GameObject collidingObject = collider.gameObject;        
+        if (victimTags.Length == 0) {
+            Kill(collidingObject);
+        }
+        else foreach (string victimTag in victimTags)
+        {
+            if (collidingObject.tag == victimTag)
+            {
+                Kill(collidingObject);       
+            }
+            return;
+        }
+    }
+
+    private void Kill(GameObject collidingObject)
+    {
         Death death = collidingObject.GetComponent<Death>();
         if (death)
         {

@@ -145,8 +145,23 @@ public class Character : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
+        {
             isGrounded = true;
+        }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            Debug.Log("Tock");
+            if (currentAction == CharacterAction.GoRight)
+            {
+                currentAction = CharacterAction.GoLeft;
+            }
+            else if (currentAction == CharacterAction.GoLeft)
+            {
+                currentAction = CharacterAction.GoRight;
+            }
+        }
     }
+
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -162,7 +177,7 @@ public class Character : MonoBehaviour
 
     private void OnDestroy()
     {
-        SceneManager.LoadScene("Start", LoadSceneMode.Single);
+        // SceneManager.LoadScene("Start", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
