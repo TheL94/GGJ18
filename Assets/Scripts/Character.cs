@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    int sideMovement = +1;
+    int sideMovement = 0;
 
     bool _isGrounded = false;
     bool isGrounded
@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
         {
             if (!_isGrounded && value)
             {
-                if(sideMovement == 1)
+                if (sideMovement == 1)
                     currentAction = CharacterAction.GoRight;
                 else if (sideMovement == -1)
                     currentAction = CharacterAction.GoLeft;
@@ -73,21 +73,29 @@ public class Character : MonoBehaviour
         ChooseAction(currentAction);
     }
 
+    void SetFireSpawn(bool right)
+    {
+        float x = Mathf.Abs(FireSpawn.localPosition.x);
+        if (!right)
+        {
+            x = -x;
+        }
+        FireSpawn.localPosition = new Vector3(x, FireSpawn.localPosition.y, FireSpawn.localPosition.z);
+    }
+
     void ChooseAction(CharacterAction _characterAction)
     {
         switch (_characterAction)
         {
             case CharacterAction.GoRight:
                 Move(1);
-                FireSpawn.localPosition = new Vector3(Mathf.Abs(FireSpawn.localPosition.x), FireSpawn.localPosition.y, FireSpawn.localPosition.z);
-                if(!spriteRend.flipX)
-                    spriteRend.flipX = true;
+                SetFireSpawn(true);
+                spriteRend.flipX = true;
                 break;
             case CharacterAction.GoLeft:
                 Move(-1);
-                FireSpawn.localPosition = new Vector3(-Mathf.Abs(FireSpawn.localPosition.x), FireSpawn.localPosition.y, FireSpawn.localPosition.z);
-                if (spriteRend.flipX)
-                    spriteRend.flipX = false;
+                SetFireSpawn(false);
+                spriteRend.flipX = false;
                 break;
             case CharacterAction.Jump:
                 Jump();
@@ -95,9 +103,20 @@ public class Character : MonoBehaviour
             case CharacterAction.Fire:
                 Fire();
                 break;
+            case CharacterAction.Idle:
+            case CharacterAction.None:
+                SetFireSpawn(true);
+                break;
         }
-
-        anim.SetInteger("AnimState", (int)currentAction);
+        if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
+        {
+            anim.enabled = true;
+            anim.SetInteger("AnimState", (int)currentAction);
+        }
+        else
+        {
+            anim.enabled = false;
+        }
     }
 
     void Move(int _direction)
