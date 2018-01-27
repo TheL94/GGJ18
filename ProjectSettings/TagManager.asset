@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Bullet
   - Character
+  - Goal
   layers:
   - Default
   - TransparentFX
