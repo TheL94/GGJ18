@@ -50,23 +50,14 @@ public class Character : MonoBehaviour
 	void FixedUpdate ()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            currentAction = CharacterAction.Jump;
-        else if (Input.GetKeyDown(KeyCode.A))
-            currentAction = CharacterAction.GoLeft;
-        else if (Input.GetKeyDown(KeyCode.D))
-            currentAction = CharacterAction.GoRight;
-        else if (Input.GetKeyDown(KeyCode.F))
-            currentAction = CharacterAction.Fire;
-
-        ChooseAction(currentAction);
+            Jump();
+        //ChooseAction(currentAction);
     }
 
     void ChooseAction(CharacterAction _characterAction)
     {
         switch (_characterAction)
         {
-            case CharacterAction.None:
-                break;
             case CharacterAction.GoRight:
                 Move(1);
                 break;
@@ -108,16 +99,16 @@ public class Character : MonoBehaviour
         if(Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
         {
             if (difference.x > 0)
-                direction = CollisionDirection.FromRight;
-            else
                 direction = CollisionDirection.FromLeft;
+            else
+                direction = CollisionDirection.FromRight;
         }
         else
         {
             if (difference.y > 0)
-                direction = CollisionDirection.FromUp;
-            else
                 direction = CollisionDirection.FromDown;
+            else
+                direction = CollisionDirection.FromUp;
         }
 
 
@@ -147,19 +138,20 @@ public class Character : MonoBehaviour
     {
         if(collision.GetComponent<Bullet>() != null)
         {
+            Destroy(collision.gameObject);
             switch (DetectCollisionSide(collision))
             {
                 case CollisionDirection.FromUp:
-                    ChooseAction(CharacterAction.Fire);
+                    currentAction = CharacterAction.Fire;
                     break;
                 case CollisionDirection.FromDown:
-                    ChooseAction(CharacterAction.Jump);
+                    currentAction = CharacterAction.Jump;
                     break;
                 case CollisionDirection.FromLeft:
-                    ChooseAction(CharacterAction.GoRight);
+                    currentAction = CharacterAction.GoRight;
                     break;
                 case CollisionDirection.FromRight:
-                    ChooseAction(CharacterAction.GoLeft);
+                    currentAction = CharacterAction.GoLeft;
                     break;
             }
         }
