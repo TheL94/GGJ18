@@ -13,8 +13,13 @@ public class Bullet : MonoBehaviour {
         t = transform;
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-        t.Translate(0, Time.fixedDeltaTime * speed, 0, Space.Self);
+	void Update () {
+        t.Translate(0, Time.deltaTime * speed, 0, Space.Self);
 	}
+
+    void OnBecameInvisible()
+    {
+        Debug.Log("Out of screen: destroyed");
+        Destroy(gameObject);
+    }
 }
