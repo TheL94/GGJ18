@@ -162,6 +162,14 @@ public class Character : MonoBehaviour
                 currentAction = CharacterAction.GoRight;
             }
         }
+        else if (collision.gameObject.tag == "Goal")
+        {
+            Debug.LogWarning("VICTORY");
+            if (currentAction != CharacterAction.Jump)
+            {
+                currentAction = CharacterAction.Jump;
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -178,7 +186,7 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Bullet>() != null)
+        if (collision.GetComponent<Bullet>() != null)
         {
             Destroy(collision.gameObject);
             switch (DetectCollisionSide(collision))
