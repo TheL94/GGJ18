@@ -51,20 +51,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    #region API
-    public void Kill()
-    {
-
-    }
-    #endregion
-
     void Start ()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
-	
-	void FixedUpdate ()
+
+    void FixedUpdate ()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             currentAction = CharacterAction.Fire;
@@ -121,23 +114,6 @@ public class Character : MonoBehaviour
     {
         CollisionDirection direction = CollisionDirection.None;
 
-        //Vector2 difference = transform.position - _collider.transform.position;
-        
-        //if(Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
-        //{
-        //    if (difference.x > 0)
-        //        direction = CollisionDirection.FromLeft;
-        //    else
-        //        direction = CollisionDirection.FromRight;
-        //}
-        //else
-        //{
-        //    if (difference.y > 0)
-        //        direction = CollisionDirection.FromDown;
-        //    else
-        //        direction = CollisionDirection.FromUp;
-        //}
-
         if(_collider.transform.up == Vector3.right)
             direction = CollisionDirection.FromLeft;
         else if (_collider.transform.up == Vector3.left)
@@ -149,8 +125,6 @@ public class Character : MonoBehaviour
         else
             direction = CollisionDirection.None;
 
-
-        Debug.Log(direction);
         return direction;
     }
 
