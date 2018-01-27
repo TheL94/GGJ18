@@ -2,7 +2,6 @@ Roba che manca:
 - Fuoco a sinistra se il drago e' girato a sinistra
 - Fuoco distrugge alcuni ostacoli
 - Drago muore se cade fuori dallo schermo
-- Game over
 - Vittoria e cambio scena
 - Rumori del drago
 - Rumori del proiettile
@@ -10,5 +9,6 @@ Roba che manca:
 - Musica
 - Animazioni del drago
 - Animazioni del proiettile
-- Distruzione degli ostacoli
-- Drago non plana
+
+Bachi:
+- Start is loading
