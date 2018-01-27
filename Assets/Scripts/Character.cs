@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    int sideMovement;
+    int sideMovement = +1;
 
     bool _isGrounded = false;
     bool isGrounded

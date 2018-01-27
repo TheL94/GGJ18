@@ -1,5 +1,4 @@
 Roba che manca:
-- Fuoco distrugge alcuni ostacoli
 - Game over
 - Vittoria e cambio scena
 - Rumori del drago
@@ -8,3 +7,4 @@ Roba che manca:
 - Musica
 - Animazioni del drago
 - Animazioni del proiettile
+- Reset livello (con Esc?)
