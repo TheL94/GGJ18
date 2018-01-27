@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
     public float speed;
 
+    private Pipe lastPipe;
     private Transform t;
 
 	// Use this for initialization
@@ -33,8 +34,13 @@ public class Bullet : MonoBehaviour {
         
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    public bool IsLastPipe(Pipe pipe)
     {
+        return lastPipe == pipe;
+    }
 
+    public void RememberLastPipe(Pipe pipe)
+    {
+        lastPipe = pipe;
     }
 }

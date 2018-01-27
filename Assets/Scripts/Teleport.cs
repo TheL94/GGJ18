@@ -6,13 +6,8 @@ public class Teleport : MonoBehaviour {
 
     public Transform destination;
 
-    private float insideRange;
-
 	// Use this for initialization
 	void Start () {
-        Vector2 objectCenter = transform.position;
-        Vector2 colliderCenter = GetComponent<Collider2D>().bounds.center;
-        insideRange = (colliderCenter - objectCenter).magnitude;
     }
 	
 	// Update is called once per frame
@@ -26,17 +21,15 @@ public class Teleport : MonoBehaviour {
         {
             return;
         }
-        if ((collider.transform.position - transform.position).magnitude > insideRange)
+        Pipe thisPipe = this.GetComponentInParent<Pipe>();
+        GameObject collidingObject = collider.gameObject;
+        if (collidingObject.GetComponent<Bullet>().IsLastPipe(thisPipe))
         {
-            Debug.Log("Colliding from outside: teleport!");
-            GameObject collidingObject = collider.gameObject;
-            collidingObject.transform.position = destination.position;
-            collidingObject.transform.rotation = destination.rotation;            
-        } 
-        else
-        {
-            Debug.Log("Colliding from inside: ignore");
+            return;
         }
+        collidingObject.GetComponent<Bullet>().RememberLastPipe(thisPipe);
+        collidingObject.transform.position = destination.position;
+        collidingObject.transform.rotation = destination.rotation;
     }
 
 }
