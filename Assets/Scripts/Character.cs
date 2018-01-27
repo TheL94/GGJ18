@@ -6,31 +6,49 @@ public class Character : MonoBehaviour
 {
     public float MovementSpeed;
     public float JumpForce;
+    public float JumpMovementAmount;
+
+    int SideMovement = 1;
 
     Rigidbody2D rigid;
+    Animator anim;
 
 	void Start ()
     {
         rigid = GetComponent<Rigidbody2D>();
-	}
+        anim = GetComponentInChildren<Animator>();
+    }
 	
-	void FixedUpdate ()
+	void Update ()
     {
-        if (Input.GetKey(KeyCode.A))
-            Move(Vector2.left);
-        if (Input.GetKey(KeyCode.D))
-            Move(Vector2.right);
         if (Input.GetKeyDown(KeyCode.Space))
-            Jump();        
+            Jump();
+        else if (Input.GetKey(KeyCode.A))
+            Move(-1);
+        else if (Input.GetKey(KeyCode.D))
+            Move(1);
     }
 
-    void Move(Vector2 _direction)
+    void Move(int _direction)
     {
-        rigid.MovePosition(rigid.position + (_direction * MovementSpeed));
+        SideMovement = _direction;
+        rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
     }
 
     void Jump()
     {
-        rigid.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
+        rigid.AddForce(new Vector2(JumpMovementAmount * SideMovement, JumpForce), ForceMode2D.Force);
+    }
+
+    public void TransmitAction(CharacterAction _action)
+    {
+
+    }
+
+    public enum CharacterAction
+    {
+        GoRight,
+        GoLeft,
+        Jump
     }
 }
