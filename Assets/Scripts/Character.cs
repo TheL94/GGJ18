@@ -87,8 +87,12 @@ public class Character : MonoBehaviour
 
     void Move(int _direction)
     {
-        sideMovement = _direction;
-        rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        if (isGrounded)
+        {
+            sideMovement = _direction;
+            //rigid.velocity = rigid.velocity + Vector2.right * (_direction * MovementSpeed);
+            rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        }
     }
 
     void Jump()

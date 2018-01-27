@@ -11,3 +11,4 @@ Roba che manca:
 - Animazioni del drago
 - Animazioni del proiettile
 - Distruzione degli ostacoli
+- Drago non plana
