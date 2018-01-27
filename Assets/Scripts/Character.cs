@@ -40,6 +40,11 @@ public class Character : MonoBehaviour
         if (isGrounded)
             currentAction = _action;
     }
+
+    public void Kill()
+    {
+
+    }
     #endregion
 
     void Start ()
