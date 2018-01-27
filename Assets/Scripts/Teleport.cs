@@ -22,6 +22,10 @@ public class Teleport : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.tag != "Bullet")
+        {
+            return;
+        }
         if ((collider.transform.position - transform.position).magnitude > insideRange)
         {
             Debug.Log("Colliding from outside: teleport!");
