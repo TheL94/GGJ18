@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     public float MovementSpeed;
@@ -96,8 +96,12 @@ public class Character : MonoBehaviour
 
     void Move(int _direction)
     {
-        sideMovement = _direction;
-        rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        if (isGrounded)
+        {
+            sideMovement = _direction;
+            //rigid.velocity = rigid.velocity + Vector2.right * (_direction * MovementSpeed);
+            rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
+        }
     }
 
     void Jump()
@@ -166,6 +170,10 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
+    }
+    private void OnDestroy()
+    {
+        SceneManager.LoadScene("Start", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
