@@ -14,12 +14,12 @@ public class DestroyObstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Burning burnable = collider.gameObject.GetComponent<Burning>();
+        Burning burnable = collider.gameObject.GetComponentInChildren<Burning>();
         if (burnable) {
             burnable.enabled = true;
         }

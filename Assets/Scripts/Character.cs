@@ -19,8 +19,6 @@ public class Character : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRend;
 
-    bool spriteFlip;
-
     CharacterAction previousAction;
     CharacterAction _currentAction = CharacterAction.None;
     CharacterAction currentAction
@@ -118,7 +116,13 @@ public class Character : MonoBehaviour
 
     void Fire()
     {
-        GameObject newfire = Instantiate(FirePrefab, FireSpawn.position, FireSpawn.rotation);
+        GameObject newfire = Instantiate(FirePrefab, FireSpawn.position, FireSpawn.rotation, transform);
+        if (spriteRend.flipX) {
+            newfire.transform.localEulerAngles = new Vector3(0, 180, 0);
+        } else
+        {
+            newfire.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
         Destroy(newfire, FireTime);
         currentAction = previousAction;
     }
