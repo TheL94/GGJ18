@@ -2,7 +2,6 @@ Roba che manca:
 - Game over
 - Cambio scena alla vittoria
 - Reset livello (con Esc?)
-- Rumori del drago
 - Rumori del proiettile
 - Rumori del cannone
 - Musica
