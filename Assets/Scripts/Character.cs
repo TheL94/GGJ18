@@ -35,12 +35,6 @@ public class Character : MonoBehaviour
     }
 
     #region API
-    public void TransmitAction(CharacterAction _action)
-    {
-        if (isGrounded)
-            currentAction = _action;
-    }
-
     public void Kill()
     {
 
@@ -111,6 +105,17 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             isGrounded = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
+
+    void DetectCollisionSide(Collision2D _collision)
+    {
+        Vector3 points = _collision.contacts[0].point;
+        
     }
 }
 
