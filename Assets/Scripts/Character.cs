@@ -150,7 +150,6 @@ public class Character : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Wall")
         {
-            Debug.Log("Tock");
             if (currentAction == CharacterAction.GoRight)
             {
                 currentAction = CharacterAction.GoLeft;
