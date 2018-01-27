@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager I;
 
-    public Character character;
-
     private void Awake()
     {
         // Singleton
@@ -16,11 +14,6 @@ public class GameManager : MonoBehaviour {
             I = this;
         else
             DestroyImmediate(gameObject);
-    }
-
-    private void Start()
-    {
-        character = FindObjectOfType<Character>();
     }
 
     public void GameOver()
