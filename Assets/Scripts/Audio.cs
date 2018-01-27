@@ -13,14 +13,26 @@ public class Audio : MonoBehaviour {
 
     private AudioSource[] sfxSources;
 
-    private static Audio instance;    
+    private static Audio instance;
+
     public static Audio GetInstance()
     {
         return instance;
     }
 
-	// Use this for initialization
-	void Start () {
+    public static void Play(Music song)
+    {
+        GetInstance().PlayMusic(song);
+    }
+
+    public static void Play(Sfx sfx)
+    {
+        GetInstance().PlaySfx(sfx);
+    }
+
+
+    // Use this for initialization
+    void Start () {
 		if (instance == null)
         {
             instance = this;
@@ -40,15 +52,16 @@ public class Audio : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Play(Sfx.Test);
+            Audio.Play(Sfx.Test);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Play(Sfx.Drums);
+            Audio.Play(Sfx.Drums);
         }
     }
 
-    public void Play(Sfx sfx)
+
+    public void PlaySfx(Sfx sfx)
     {
 
         switch (sfx)
@@ -62,7 +75,7 @@ public class Audio : MonoBehaviour {
         }
     }
 
-    public void Play(Music song)
+    public void PlayMusic(Music song)
     {
 
         switch (song)
