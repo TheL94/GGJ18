@@ -38,6 +38,7 @@ public class LethalObstacle : MonoBehaviour {
 
     private void Kill(GameObject collidingObject)
     {
+        Audio.Play(Audio.Sfx.Crash);
         Death death = collidingObject.GetComponent<Death>();
         if (death)
         {

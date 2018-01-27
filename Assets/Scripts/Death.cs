@@ -22,6 +22,10 @@ public class Death : MonoBehaviour {
         {
             lethalObstacle.enabled = false;
         }
+        if (CompareTag("Character"))
+        {
+            Audio.Play(Audio.Sfx.Lose);
+        }
     }
 	
 	// Update is called once per frame

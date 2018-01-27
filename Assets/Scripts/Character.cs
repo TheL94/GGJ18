@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     public Transform FireSpawn;
 
     public float FireTime = 0.5f;
+    public float StepNoisePeriod = 0.5f;
 
     float timer;
 
@@ -110,8 +111,10 @@ public class Character : MonoBehaviour
 
     void Jump()
     {
-        if(isGrounded)
+        if (isGrounded) {
+            Audio.Play(Audio.Sfx.Jump);
             rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
+        }
     }
 
     void Fire()
@@ -123,6 +126,7 @@ public class Character : MonoBehaviour
         {
             newfire.transform.localEulerAngles = new Vector3(0, 0, 0);
         }
+        Audio.Play(Audio.Sfx.Fire);
         Destroy(newfire, FireTime);
         currentAction = previousAction;
     }

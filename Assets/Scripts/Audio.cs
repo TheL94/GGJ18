@@ -5,10 +5,19 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour {
 
+    public int maxSimultaneousSfxs;
     public AudioSource sfxSource;
     public AudioSource musicSource;
 
-    public AudioClip test, drums;
+    // SFX:
+    public AudioClip test;
+    public AudioClip[] footsteps;
+    public AudioClip fire;
+    public AudioClip jump;
+    public AudioClip crash;
+    public AudioClip lose;
+
+    // Music:
     public AudioClip mainTheme;
 
     private AudioSource[] sfxSources;
@@ -30,13 +39,17 @@ public class Audio : MonoBehaviour {
         GetInstance().PlaySfx(sfx);
     }
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     // Use this for initialization
     void Start () {
 		if (instance == null)
         {
             instance = this;
-            sfxSources = new AudioSource[6];
+            sfxSources = new AudioSource[maxSimultaneousSfxs];
             for (int i = 0; i < sfxSources.Length; i++)
             {
                 sfxSources[i] = Instantiate(sfxSource, Camera.main.transform);
@@ -54,12 +67,7 @@ public class Audio : MonoBehaviour {
         {
             Audio.Play(Sfx.Test);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Audio.Play(Sfx.Drums);
-        }
     }
-
 
     public void PlaySfx(Sfx sfx)
     {
@@ -69,8 +77,20 @@ public class Audio : MonoBehaviour {
             case Sfx.Test:
                 PlaySfx(test);
                 break;
-            case Sfx.Drums:
-                PlaySfx(drums);
+            case Sfx.Footstep:
+                PlaySfx(footsteps, 0.15f);
+                break;
+            case Sfx.Fire:
+                PlaySfx(fire);
+                break;
+            case Sfx.Jump:
+                PlaySfx(jump);
+                break;
+            case Sfx.Crash:
+                PlaySfx(crash);
+                break;
+            case Sfx.Lose:
+                PlaySfx(lose);
                 break;
         }
     }
@@ -96,24 +116,33 @@ public class Audio : MonoBehaviour {
         }
     }
 
-    private void PlaySfx(AudioClip clip)
+    private void PlaySfx(AudioClip[] clips, float volumeScale = 1f)
+    {
+        PlaySfx(clips[UnityEngine.Random.Range(0, clips.Length)], volumeScale);
+    }
+
+    private void PlaySfx(AudioClip clip, float volumeScale = 1f)
     {
         foreach (AudioSource source in sfxSources)
         {
             if (!source.isPlaying)
             {
-                source.PlayOneShot(clip);
+                source.PlayOneShot(clip, volumeScale);
                 return;
             }
         }
         // if all are busy...
-        sfxSources[0].PlayOneShot(clip);
+        sfxSources[0].PlayOneShot(clip, volumeScale);
     }
 
     public enum Sfx
     {
         Test,
-        Drums
+        Footstep,
+        Fire,
+        Jump,
+        Crash,
+        Lose
     }
 
     public enum Music
