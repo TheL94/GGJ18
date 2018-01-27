@@ -70,6 +70,7 @@ public class Character : MonoBehaviour
             currentAction = CharacterAction.GoLeft;
         if (Input.GetKeyDown(KeyCode.Space))
             currentAction = CharacterAction.Jump;
+
         ChooseAction(currentAction);
     }
 
@@ -108,6 +109,7 @@ public class Character : MonoBehaviour
                 SetFireSpawn(true);
                 break;
         }
+
         if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
         {
             anim.enabled = true;
@@ -130,7 +132,8 @@ public class Character : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded) {
+        if (isGrounded)
+        {
             Audio.Play(Audio.Sfx.Jump);
             rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
         }

@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Audio : MonoBehaviour {
-
+public class Audio : MonoBehaviour
+{
     public int maxSimultaneousSfxs;
     public AudioSource sfxSource;
     public AudioSource musicSource;
@@ -55,7 +55,8 @@ public class Audio : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		if (instance == null)
         {
             instance = this;
@@ -72,7 +73,8 @@ public class Audio : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Audio.Play(Sfx.Test);
@@ -81,7 +83,6 @@ public class Audio : MonoBehaviour {
 
     public void PlaySfx(Sfx sfx)
     {
-
         switch (sfx)
         {
             case Sfx.Test:
@@ -107,7 +108,6 @@ public class Audio : MonoBehaviour {
 
     public void PlayMusic(Music song)
     {
-
         switch (song)
         {
             case Music.MainTheme:
