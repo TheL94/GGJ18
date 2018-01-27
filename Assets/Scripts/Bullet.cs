@@ -19,7 +19,17 @@ public class Bullet : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        Debug.Log("Out of screen: destroyed");
-        Destroy(gameObject);
+        Death death = GetComponent<Death>();
+        if (death)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder += 100;
+            speed /= 5;
+        }
+        else
+        {
+            Debug.Log("Out of screen: destroyed");
+            Destroy(gameObject);
+        }
+        
     }
 }
