@@ -49,9 +49,7 @@ public class Character : MonoBehaviour
 	
 	void FixedUpdate ()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Jump();
-        //ChooseAction(currentAction);
+        ChooseAction(currentAction);
     }
 
     void ChooseAction(CharacterAction _characterAction)
