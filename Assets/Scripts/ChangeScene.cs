@@ -8,7 +8,7 @@ public class ChangeScene : MonoBehaviour {
     void Start () {
     }
     public void Change() {
-        SceneManager.LoadScene("PlatformScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
     }
     public void Quit() {
         Application.Quit();

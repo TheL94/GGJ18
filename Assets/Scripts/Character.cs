@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
     }
     private void OnDestroy()
     {
-        SceneManager.LoadScene("PlatformScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Start", LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
