@@ -17,6 +17,11 @@ public class Death : MonoBehaviour {
         {
             sr = GetComponentInChildren<SpriteRenderer>();
         }
+        LethalObstacle lethalObstacle = GetComponent<LethalObstacle>();
+        if (lethalObstacle)
+        {
+            lethalObstacle.enabled = false;
+        }
     }
 	
 	// Update is called once per frame

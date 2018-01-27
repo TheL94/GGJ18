@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e7c7e4464ca964f9f625e7ba09985b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.5
+  MovementSpeed: 1
   JumpForce: 150
   JumpMovementAmount: 50
   FirePrefab: {fileID: 1862764903395668, guid: d4f5ea17c57299a489b972cb6d0a5f78, type: 2}

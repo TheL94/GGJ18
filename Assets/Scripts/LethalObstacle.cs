@@ -17,18 +17,22 @@ public class LethalObstacle : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D collider)
-    {        
-        GameObject collidingObject = collider.gameObject;        
-        if (victimTags.Length == 0) {
-            Kill(collidingObject);
-        }
-        else foreach (string victimTag in victimTags)
+    {
+        if (isActiveAndEnabled)
         {
-            if (collidingObject.tag == victimTag)
+            GameObject collidingObject = collider.gameObject;
+            if (victimTags.Length == 0)
             {
-                Kill(collidingObject);       
+                Kill(collidingObject);
             }
-            return;
+            else foreach (string victimTag in victimTags)
+                {
+                    if (collidingObject.tag == victimTag)
+                    {
+                        Kill(collidingObject);
+                    }
+                    return;
+                }
         }
     }
 
