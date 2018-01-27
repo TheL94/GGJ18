@@ -19,9 +19,9 @@ public class DestroyObstacle : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject collidingObject = collider.gameObject;
-        if (collidingObject.tag == "Burnable") {
-            Destroy(collider);
+        Burning burnable = collider.gameObject.GetComponent<Burning>();
+        if (burnable) {
+            burnable.enabled = true;
         }
     }
 }

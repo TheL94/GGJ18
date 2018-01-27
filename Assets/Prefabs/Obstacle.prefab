@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212792342843362650}
   - component: {fileID: 114846838317208280}
   - component: {fileID: 61253213245206436}
+  - component: {fileID: 114987151754862756}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -80,6 +81,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victimTags:
   - Character
+--- !u!114 &114987151754862756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569745294305770}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e236df1d4143b0243a605b69b6bd1902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212792342843362650
 SpriteRenderer:
   m_ObjectHideFlags: 1
