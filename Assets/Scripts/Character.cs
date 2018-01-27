@@ -100,7 +100,7 @@ public class Character : MonoBehaviour
     void Fire()
     {
         GameObject newfire = Instantiate(fire, hotSpot.position, hotSpot.rotation);
-        Destroy(newfire, 1f);
+        Destroy(newfire, 0.5f);
         currentAction = previousAction;
 
     }
