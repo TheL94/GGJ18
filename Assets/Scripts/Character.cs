@@ -8,47 +8,111 @@ public class Character : MonoBehaviour
     public float JumpForce;
     public float JumpMovementAmount;
 
-    int SideMovement = 1;
+    float timer;
 
     Rigidbody2D rigid;
     Animator anim;
 
-	void Start ()
+    CharacterAction currentAction;
+
+    int sideMovement;
+
+    bool _isGrounded = false;
+    bool isGrounded
+    {
+        get { return _isGrounded; }
+        set
+        {
+            if (!_isGrounded && value)
+            {
+                if(sideMovement == 1)
+                    currentAction = CharacterAction.GoRight;
+                if (sideMovement == -1)
+                    currentAction = CharacterAction.GoLeft;
+            }
+            _isGrounded = value;
+        }
+    }
+
+    #region API
+    public void TransmitAction(CharacterAction _action)
+    {
+        if (isGrounded)
+            currentAction = _action;
+    }
+    #endregion
+
+    void Start ()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
 	
-	void Update ()
+	void FixedUpdate ()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Jump();
+            currentAction = CharacterAction.Jump;
         else if (Input.GetKey(KeyCode.A))
-            Move(-1);
+            currentAction = CharacterAction.GoLeft;
         else if (Input.GetKey(KeyCode.D))
-            Move(1);
+            currentAction = CharacterAction.GoRight;
+
+        ChooseAction(currentAction);
+    }
+
+    void ChooseAction(CharacterAction _characterAction)
+    {
+        switch (_characterAction)
+        {
+            case CharacterAction.None:
+                break;
+            case CharacterAction.GoRight:
+                Move(1);
+                break;
+            case CharacterAction.GoLeft:
+                Move(-1);
+                break;
+            case CharacterAction.Jump:
+                Jump();
+                break;
+        }
     }
 
     void Move(int _direction)
     {
-        SideMovement = _direction;
+        sideMovement = _direction;
         rigid.MovePosition(rigid.position + new Vector2(_direction * MovementSpeed * Time.deltaTime, 0f));
     }
 
     void Jump()
     {
-        rigid.AddForce(new Vector2(JumpMovementAmount * SideMovement, JumpForce), ForceMode2D.Force);
+        if(isGrounded)
+            rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
     }
 
-    public void TransmitAction(CharacterAction _action)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = true;
     }
 
-    public enum CharacterAction
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        GoRight,
-        GoLeft,
-        Jump
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = true;
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = false;
+    }
+}
+
+public enum CharacterAction
+{
+    None = -1,
+    GoRight = 0,
+    GoLeft = 1,
+    Jump = 2
 }
