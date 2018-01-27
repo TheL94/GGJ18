@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
 
-    CharacterAction currentAction;
+    CharacterAction currentAction = CharacterAction.None;
 
     int sideMovement;
 
@@ -99,6 +99,32 @@ public class Character : MonoBehaviour
 
     }
 
+    CollisionDirection DetectCollisionSide(Collider2D _collider)
+    {
+        CollisionDirection direction = CollisionDirection.None;
+
+        Vector2 difference = transform.position - _collider.transform.position;
+        
+        if(Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
+        {
+            if (difference.x > 0)
+                direction = CollisionDirection.FromRight;
+            else
+                direction = CollisionDirection.FromLeft;
+        }
+        else
+        {
+            if (difference.y > 0)
+                direction = CollisionDirection.FromUp;
+            else
+                direction = CollisionDirection.FromDown;
+        }
+
+
+        Debug.Log(direction);
+        return direction;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -119,14 +145,35 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.GetComponent<Bullet>() != null)
+        {
+            switch (DetectCollisionSide(collision))
+            {
+                case CollisionDirection.FromUp:
+                    ChooseAction(CharacterAction.Fire);
+                    break;
+                case CollisionDirection.FromDown:
+                    ChooseAction(CharacterAction.Jump);
+                    break;
+                case CollisionDirection.FromLeft:
+                    ChooseAction(CharacterAction.GoRight);
+                    break;
+                case CollisionDirection.FromRight:
+                    ChooseAction(CharacterAction.GoLeft);
+                    break;
+            }
+        }
     }
 
-    void DetectCollisionSide(Collision2D _collision)
-    {
-        Vector3 points = _collision.contacts[0].point;
-        
-    }
+}
+
+public enum CollisionDirection
+{
+    None,
+    FromUp,
+    FromDown,
+    FromLeft,
+    FromRight
 }
 
 public enum CharacterAction
