@@ -14,18 +14,16 @@ public class Character : MonoBehaviour
     public float FireTime = 0.5f;
     public float StepNoisePeriod = 0.5f;
 
-    float timer;
-
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer spriteRend;
 
     CharacterAction previousAction;
     CharacterAction _currentAction = CharacterAction.None;
-    CharacterAction currentAction
+    public CharacterAction currentAction
     {
         get { return _currentAction; }
-        set
+        private set
         {
             previousAction = _currentAction;
             _currentAction = value;
@@ -110,15 +108,18 @@ public class Character : MonoBehaviour
                 break;
         }
 
-        if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
-        {
-            anim.enabled = true;
-            anim.SetInteger("AnimState", (int)currentAction);
-        }
-        else
-        {
-            anim.enabled = false;
-        }
+        //if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
+        //{
+        //    anim.enabled = true;
+        //    anim.SetInteger("AnimState", (int)currentAction);
+        //}
+        //else
+        //{
+        //    anim.enabled = false;
+        //}
+
+        anim.SetInteger("AnimState", (int)currentAction);
+
     }
 
     void Move(int _direction)
