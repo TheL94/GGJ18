@@ -8,13 +8,25 @@ public class Character : MonoBehaviour
     public float JumpForce;
     public float JumpMovementAmount;
 
+    public GameObject fire;
+    public Transform hotSpot;
+
     float timer;
 
     Rigidbody2D rigid;
     Animator anim;
 
-    CharacterAction currentAction = CharacterAction.None;
-
+    CharacterAction _currentAction = CharacterAction.None;
+    CharacterAction currentAction
+    {
+        get { return _currentAction; }
+        set
+        {
+            previousAction = _currentAction;
+            _currentAction = value;
+        }
+    }
+    CharacterAction previousAction;
     int sideMovement;
 
     bool _isGrounded = false;
@@ -87,6 +99,9 @@ public class Character : MonoBehaviour
 
     void Fire()
     {
+        GameObject newfire = Instantiate(fire, hotSpot.position, hotSpot.rotation);
+        Destroy(newfire, 1f);
+        currentAction = previousAction;
 
     }
 
