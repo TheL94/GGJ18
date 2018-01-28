@@ -27,11 +27,6 @@ public class Death : MonoBehaviour {
         {
             lethalObstacle.enabled = false;
         }
-        if (CompareTag("Character"))
-        {
-            Audio.Play(Audio.Sfx.Lose);
-            GameManager.I.GoToMenu();
-        }
     }
 	
 	// Update is called once per frame
@@ -44,6 +39,10 @@ public class Death : MonoBehaviour {
                 progressIndex++;
                 if (progressIndex >= blinks.Length)
                 {
+                    if (CompareTag("Character"))
+                    {
+                        GameManager.I.GoToGameOver();
+                    }
                     Destroy(this.gameObject);
                     return;
                 }                

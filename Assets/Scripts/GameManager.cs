@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
             Audio.Play(Audio.Music.MainTheme);
         }
+        else if (_levelNumber == 3)
+        {
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            Audio.Play(Audio.Music.MainTheme);
+        }
         else
             GoToMenu();
 
@@ -63,8 +68,21 @@ public class GameManager : MonoBehaviour
         Audio.Play(Audio.Music.MenuTheme);
     }
 
+    public void GoToGameOver()
+    {
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+        Audio.Play(Audio.Sfx.Lose);
+        StartCoroutine(GoToMenuAfterGameOver());
+    }
+
     public void Quit()
     {
         Application.Quit();
+    }
+
+    IEnumerator GoToMenuAfterGameOver()
+    {
+        yield return new WaitForSeconds(2.5f);
+        GoToMenu();
     }
 }
