@@ -30,6 +30,7 @@ public class Death : MonoBehaviour {
         if (CompareTag("Character"))
         {
             Audio.Play(Audio.Sfx.Lose);
+            GameManager.I.GoToMenu();
         }
     }
 	

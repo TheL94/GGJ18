@@ -560,6 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e2213724d2dff4ba332e5772164d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TransitionTime: 0
 --- !u!4 &1738140132
 Transform:
   m_ObjectHideFlags: 0
@@ -573,7 +574,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2013738592
+--- !u!1001 &1804255117
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2

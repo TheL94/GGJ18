@@ -205,11 +205,11 @@ public class Character : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Goal")
         {
-            Debug.LogWarning("VICTORY");
             if (currentAction != CharacterAction.Jump)
             {
                 currentAction = CharacterAction.Jump;
             }
+            GameManager.I.GoToNextLevel();
         }
     }
 
