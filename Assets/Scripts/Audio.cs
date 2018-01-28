@@ -71,7 +71,7 @@ public class Audio : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 	}
 
