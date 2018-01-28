@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,13 @@ public class Bullet : MonoBehaviour {
     private Pipe lastPipe;
     private Transform t;
 
-	// Use this for initialization
-	void Start () {
+    internal void SlowDown()
+    {
+        speed /= 5;
+    }
+
+    // Use this for initialization
+    void Start () {
         t = transform;
 	}
 	
@@ -21,13 +27,8 @@ public class Bullet : MonoBehaviour {
     void OnBecameInvisible()
     {
         Death death = GetComponent<Death>();
-        if (death)
-        {
-            GetComponent<SpriteRenderer>().sortingOrder += 100;
-            speed /= 5;
-        }
-        else
-        {
+        if (!death)
+        {            
             Debug.Log("Out of screen: destroyed");
             Destroy(gameObject);
         }
