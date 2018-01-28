@@ -52,8 +52,10 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             Audio.Play(Audio.Music.MainTheme);
         }
-        else
+        else if(_levelNumber > 3)
+        {
             GoToMenu();
+        }
 
     }
 
