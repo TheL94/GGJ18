@@ -28,6 +28,7 @@ public class CreateBullet : MonoBehaviour
             //azione
             Instantiate(bullet, hotSpot.position, hotSpot.rotation);
             counter = 0;
+            Audio.Play(Audio.Sfx.Shoot);
         }
     }
 
