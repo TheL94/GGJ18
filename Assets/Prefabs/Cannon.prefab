@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 114340587788994068, guid: b145392b954419c43b2109807d7a88e7, type: 2}
   hotSpot: {fileID: 4299052772270716}
-  timer: 0.5
+  timer: 1
 --- !u!212 &212359189822866392
 SpriteRenderer:
   m_ObjectHideFlags: 1
