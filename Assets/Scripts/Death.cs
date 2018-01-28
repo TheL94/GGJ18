@@ -10,8 +10,13 @@ public class Death : MonoBehaviour {
     private bool on = true;
     private SpriteRenderer sr;
 
+    void Start()
+    {
+        BaseStart();
+    }
+
     // Use this for initialization
-    void Start () {
+    protected void BaseStart() {
         sr = GetComponent<SpriteRenderer>();
         if (!sr)
         {

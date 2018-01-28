@@ -42,7 +42,10 @@ public class LethalObstacle : MonoBehaviour {
         Death death = collidingObject.GetComponent<Death>();
         if (death)
         {
-            //collidingObject.GetComponent<Collider2D>().enabled = false;
+            if (collidingObject.tag == "Bullet")
+            {
+                collidingObject.GetComponent<Collider2D>().enabled = false;
+            }
             collidingObject.GetComponent<Death>().enabled = true;
         }
         else
