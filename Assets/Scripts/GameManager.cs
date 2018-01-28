@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
             I = this;
         else
             DestroyImmediate(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void GameOver()
