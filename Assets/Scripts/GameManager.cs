@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         else
             DestroyImmediate(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(I.gameObject);
     }
 
     private void Update()
@@ -29,7 +29,10 @@ public class GameManager : MonoBehaviour
 
     public void GoToLevel(int _levelNumber)
     {
-        SceneManager.LoadScene(_levelNumber, LoadSceneMode.Single);
+        if(_levelNumber == 1)
+        {
+            StartCoroutine(WaitToLevel("TutorialScene"));
+        }
         currentLevel = _levelNumber;
     }
 
@@ -52,5 +55,11 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(TransitionTime);
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    IEnumerator WaitToLevel(string _levelName)
+    {
+        yield return new WaitForSeconds(TransitionTime);
+        SceneManager.LoadScene(_levelName, LoadSceneMode.Single);
     }
 }
