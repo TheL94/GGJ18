@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour
+{
     public static GameManager I;
+    public float TransitionTime;
+
+    int currentLevel;
 
     private void Awake()
     {
@@ -18,8 +21,36 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void GameOver()
+    private void Update()
     {
-        SceneManager.LoadScene("Start", LoadSceneMode.Single);
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Quit();
+    }
+
+    public void GoToLevel(int _levelNumber)
+    {
+        SceneManager.LoadScene(_levelNumber, LoadSceneMode.Single);
+        currentLevel = _levelNumber;
+    }
+
+    public void GoToNextLevel()
+    {
+        GoToLevel(currentLevel + 1);
+    }
+
+    public void GoToMenu()
+    {
+        StartCoroutine(WaitToMenu());
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    IEnumerator WaitToMenu()
+    {
+        yield return new WaitForSeconds(TransitionTime);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
