@@ -33,6 +33,8 @@ public class Character : MonoBehaviour
     int sideMovement = 0;
 
     bool _isGrounded = false;
+    private int victoryJumps = 4;
+
     bool isGrounded
     {
         get { return _isGrounded; }
@@ -208,8 +210,13 @@ public class Character : MonoBehaviour
             if (currentAction != CharacterAction.Jump)
             {
                 currentAction = CharacterAction.Jump;
+                victoryJumps--;
+                if (victoryJumps == 0)
+                {
+                    GameManager.I.GoToNextLevel();
+                }                
             }
-            GameManager.I.GoToNextLevel();
+            
         }
     }
 
