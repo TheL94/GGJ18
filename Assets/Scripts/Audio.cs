@@ -21,11 +21,11 @@ public class Audio : MonoBehaviour
     public AudioClip[] bullets;
     public AudioClip cog;
     public AudioClip shoot;
+    public AudioClip gameOver;
 
     // Music:
     public AudioClip mainTheme;
     public AudioClip menuTheme;
-    public AudioClip gameOver;
 
     private AudioSource[] sfxSources;
 
@@ -134,6 +134,9 @@ public class Audio : MonoBehaviour
     {
         switch (song)
         {
+            case Music.MenuTheme:
+                PlayMusic(menuTheme);
+                break;
             case Music.MainTheme:
                 PlayMusic(mainTheme);
                 break;
@@ -145,10 +148,10 @@ public class Audio : MonoBehaviour
 
     private void PlayMusic(AudioClip clip)
     {
-        if (musicSource != clip)
+        if (musicSource.clip != clip)
         {
             musicSource.Stop();
-            musicSource.clip = mainTheme;
+            musicSource.clip = clip;
             musicSource.Play();
         }
     }
@@ -190,6 +193,7 @@ public class Audio : MonoBehaviour
 
     public enum Music
     {
+        MenuTheme,
         MainTheme
     }
 }

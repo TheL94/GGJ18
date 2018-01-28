@@ -23,6 +23,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (currentLevel == 0)
+        {
+            Audio.Play(Audio.Music.MenuTheme);
+        }
+        else
+        {
+            Audio.Play(Audio.Music.MainTheme);
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
             Quit();
     }

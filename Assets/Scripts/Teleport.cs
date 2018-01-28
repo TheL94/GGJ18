@@ -30,7 +30,6 @@ public class Teleport : MonoBehaviour {
         collidingObject.GetComponent<Bullet>().RememberLastPipe(thisPipe);
         collidingObject.transform.position = destination.position;
         collidingObject.transform.rotation = destination.rotation;
-        Debug.Log("Swooosh");
         Audio.Play(Audio.Sfx.Bullet);
     }
 
