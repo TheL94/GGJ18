@@ -132,7 +132,7 @@ public class Character : MonoBehaviour
     {
         if (isGrounded)
         {
-            Audio.Play(Audio.Sfx.Jump);
+            Audio.Play(Audio.Sfx.Jump);            
             rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
         }
     }
@@ -173,8 +173,13 @@ public class Character : MonoBehaviour
     {
         foreach (ContactPoint2D contact in groundCollision.contacts)
         {
-            if (contact.normal.y > 0)
+            if (contact.normal.y > Mathf.Abs(contact.normal.x))
             {
+                if (currentAction == CharacterAction.Jump)
+                {
+                    Debug.Log("Landing");
+                    Audio.Play(Audio.Sfx.Land);
+                }
                 isGrounded = true;
                 return;
             }

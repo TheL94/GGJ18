@@ -15,9 +15,18 @@ public class DragonEventsReceiver : MonoBehaviour {
 	}
 
     private void StepEvent()
-    {       
-        // Non trovavo la chiamata a questa funzione, da correggere se hai voglia
-        if(GetComponentInParent<Character>().currentAction != CharacterAction.Idle)
+    {
+        // Called from animation
+        CharacterAction action = GetComponentInParent<Character>().currentAction;
+        if (action != CharacterAction.Idle && action != CharacterAction.Jump)
+        {
             Audio.Play(Audio.Sfx.Footstep);
+        }
+    }
+
+    private void WingEvent()
+    {
+        // Called from animation
+        Audio.Play(Audio.Sfx.Wing);
     }
 }

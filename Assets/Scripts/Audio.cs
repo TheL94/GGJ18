@@ -12,12 +12,14 @@ public class Audio : MonoBehaviour
     // SFX:
     public AudioClip[] footsteps;
     public AudioClip test;
-    public AudioClip fireBall;
+    public AudioClip fire;
     public AudioClip roar;
     public AudioClip jumpStart;
     public AudioClip jumpEnd;
     public AudioClip crash;
-    public AudioClip wings;
+    public AudioClip wing;
+    public AudioClip[] bullets;
+    public AudioClip cog;
 
     // Music:
     public AudioClip mainTheme;
@@ -92,16 +94,34 @@ public class Audio : MonoBehaviour
                 PlaySfx(footsteps, 0.15f);
                 break;
             case Sfx.Fire:
+                PlaySfx(fire);
+                break;
+            case Sfx.Roar:
                 PlaySfx(roar);
                 break;
             case Sfx.Jump:
                 PlaySfx(jumpStart);
+                break;
+            case Sfx.Land:
+                PlaySfx(jumpEnd);
                 break;
             case Sfx.Crash:
                 PlaySfx(crash);
                 break;
             case Sfx.Lose:
                 PlaySfx(gameOver);
+                break;
+            case Sfx.Wing:
+                PlaySfx(wing);
+                break;
+            case Sfx.Bullet:
+                PlaySfx(bullets);
+                break;
+            case Sfx.Cog:
+                PlaySfx(cog);
+                break;
+            default:
+                Debug.LogWarning("Unknown SFX: " + sfx);
                 break;
         }
     }
@@ -112,6 +132,9 @@ public class Audio : MonoBehaviour
         {
             case Music.MainTheme:
                 PlayMusic(mainTheme);
+                break;
+            default:
+                Debug.LogWarning("Unknown song: " + song);
                 break;
         }
     }
@@ -152,8 +175,12 @@ public class Audio : MonoBehaviour
         Fire,
         Roar,
         Jump,
+        Land,
         Crash,
-        Lose
+        Lose,
+        Wing,
+        Bullet,
+        Cog
     }
 
     public enum Music
