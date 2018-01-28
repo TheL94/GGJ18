@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4985707120675856}
   - component: {fileID: 61606843254068206}
   - component: {fileID: 50365560009486564}
+  - component: {fileID: 114829529732844254}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +101,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.026058197, y: -0.10998902}
@@ -116,6 +117,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.0145264, y: 1.5951636}
   m_EdgeRadius: 0
+--- !u!114 &114829529732844254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1073858259600634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024b829718fe8b04b8385a21eb30862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  victimTags:
+  - Character
 --- !u!212 &212103165034796372
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -125,6 +139,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -140,6 +155,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
