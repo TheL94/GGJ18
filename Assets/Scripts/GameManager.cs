@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float TransitionTime;
 
     int currentLevel;
+    bool isPlayingMusic = false;
 
     private void Awake()
     {
@@ -23,14 +24,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentLevel == 0)
+        if (!isPlayingMusic)
         {
+            isPlayingMusic = false;
             Audio.Play(Audio.Music.MenuTheme);
         }
-        else
-        {
-            Audio.Play(Audio.Music.MainTheme);
-        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
             Quit();
     }
@@ -41,10 +40,12 @@ public class GameManager : MonoBehaviour
         if (_levelNumber == 1)
         {
             SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
+            Audio.Play(Audio.Music.MainTheme);
         }
         else if (_levelNumber == 2)
         {
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+            Audio.Play(Audio.Music.MainTheme);
         }
         else
             GoToMenu();
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void GoToMenu()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Audio.Play(Audio.Music.MenuTheme);
     }
 
     public void Quit()
