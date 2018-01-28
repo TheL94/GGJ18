@@ -66,7 +66,7 @@ public class Audio : MonoBehaviour
             sfxSources = new AudioSource[maxSimultaneousSfxs];
             for (int i = 0; i < sfxSources.Length; i++)
             {
-                sfxSources[i] = Instantiate(sfxSource, Camera.main.transform);
+                sfxSources[i] = Instantiate(sfxSource, transform);
             }
         }
         else
