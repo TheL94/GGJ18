@@ -108,18 +108,15 @@ public class Character : MonoBehaviour
                 break;
         }
 
-        //if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
-        //{
-        //    anim.enabled = true;
-        //    anim.SetInteger("AnimState", (int)currentAction);
-        //}
-        //else
-        //{
-        //    anim.enabled = false;
-        //}
-
-        anim.SetInteger("AnimState", (int)currentAction);
-
+        if (currentAction != CharacterAction.None)
+        {
+            anim.enabled = true;
+            anim.SetInteger("AnimState", (int)currentAction);
+        }
+        else
+        {
+            anim.enabled = false;
+        }
     }
 
     void Move(int _direction)
