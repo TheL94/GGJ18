@@ -282,12 +282,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 155cf841e547adc4bb2e392e8c54aad1, type: 3}
   - {fileID: 8300000, guid: 4812360f3db11ca4684ab1b9226622fb, type: 3}
   test: {fileID: 8300000, guid: cdf62eeac4f052447a3cdbb7a959269c, type: 3}
-  fireBall: {fileID: 8300000, guid: bf7dcf549152b6544affb20f1851a918, type: 3}
+  fire: {fileID: 8300000, guid: bf7dcf549152b6544affb20f1851a918, type: 3}
   roar: {fileID: 8300000, guid: a06330837d6c7034da5142d0a82bfea1, type: 3}
   jumpStart: {fileID: 8300000, guid: 307db2ee834903d408948135aa2fc4ff, type: 3}
   jumpEnd: {fileID: 8300000, guid: 219681878338e934cb7c3d63400e550f, type: 3}
   crash: {fileID: 8300000, guid: 456c67c199e30af4587ebcdab8d4de79, type: 3}
-  wings: {fileID: 8300000, guid: 75c2868daaacb2845b0e62d339088822, type: 3}
+  wing: {fileID: 8300000, guid: 75c2868daaacb2845b0e62d339088822, type: 3}
+  bullets:
+  - {fileID: 8300000, guid: 3dd8a929a44b87349a2f242a55aef50b, type: 3}
+  cog: {fileID: 8300000, guid: ae529c9757ef6e4458ba517d1730d713, type: 3}
+  shoot: {fileID: 8300000, guid: 57aaf8204e2726844aea2d2a76e26de7, type: 3}
   mainTheme: {fileID: 8300000, guid: dd5b030c9569cce4fa5a09dab47f6586, type: 3}
   menuTheme: {fileID: 8300000, guid: 238f54c7f3b8be74bb3b33ae137f3cfa, type: 3}
   gameOver: {fileID: 8300000, guid: 0f832d92516795945bef92a0b7af2520, type: 3}

@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour {
     internal void SlowDown()
     {
         speed /= 5;
+        Audio.Play(Audio.Sfx.Crash);
     }
 
     // Use this for initialization

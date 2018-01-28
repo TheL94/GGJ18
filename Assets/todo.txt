@@ -1,9 +1,7 @@
 Roba che manca:
-- Rumori del proiettile
-- Rumori del cannone
 - Musica
 
-Da testare :
+Da testare:
 - Game over
 - Cambio scena alla vittoria
 - Reset livello (con Esc?)

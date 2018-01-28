@@ -231,7 +231,9 @@ public class Character : MonoBehaviour
     {
         if (collision.GetComponent<Bullet>() != null)
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<Collider2D>().enabled = false;
+            collision.GetComponent<Death>().enabled = true;
+            Audio.Play(Audio.Sfx.Roar);
             switch (DetectCollisionSide(collision))
             {
                 case CollisionDirection.FromUp:

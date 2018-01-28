@@ -20,6 +20,7 @@ public class Audio : MonoBehaviour
     public AudioClip wing;
     public AudioClip[] bullets;
     public AudioClip cog;
+    public AudioClip shoot;
 
     // Music:
     public AudioClip mainTheme;
@@ -120,6 +121,9 @@ public class Audio : MonoBehaviour
             case Sfx.Cog:
                 PlaySfx(cog);
                 break;
+            case Sfx.Shoot:
+                PlaySfx(shoot);
+                break;
             default:
                 Debug.LogWarning("Unknown SFX: " + sfx);
                 break;
@@ -180,7 +184,8 @@ public class Audio : MonoBehaviour
         Lose,
         Wing,
         Bullet,
-        Cog
+        Cog,
+        Shoot
     }
 
     public enum Music
