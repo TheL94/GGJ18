@@ -9,10 +9,11 @@ public class Bullet : MonoBehaviour {
 
     private Pipe lastPipe;
     private Transform t;
+    private bool braking = false;
 
     internal void SlowDown()
     {
-        speed /= 5;
+        braking = true;
         Audio.Play(Audio.Sfx.Crash);
     }
 
@@ -22,6 +23,10 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (braking)
+        {
+            speed *= 0.95f;
+        }
         t.Translate(0, Time.deltaTime * speed, 0, Space.Self);
 	}
 
