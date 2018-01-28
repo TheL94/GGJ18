@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour
     {
         if (_levelNumber == 1)
         {
-            StartCoroutine(WaitToLevel("TutorialScene"));
+            SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
         }
         else if (_levelNumber == 2)
         {
-            StartCoroutine(WaitToLevel("Level1"));
+            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
         else
             GoToMenu();
@@ -58,23 +58,11 @@ public class GameManager : MonoBehaviour
 
     public void GoToMenu()
     {
-        StartCoroutine(WaitToMenu());
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void Quit()
     {
         Application.Quit();
-    }
-
-    IEnumerator WaitToMenu()
-    {
-        yield return new WaitForSeconds(TransitionTime);
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-    }
-
-    IEnumerator WaitToLevel(string _levelName)
-    {
-        yield return new WaitForSeconds(TransitionTime);
-        SceneManager.LoadScene(_levelName, LoadSceneMode.Single);
     }
 }
