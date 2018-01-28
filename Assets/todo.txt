@@ -5,4 +5,3 @@ Roba che manca:
 - Rumori del proiettile
 - Rumori del cannone
 - Musica
-- Animazioni del proiettile
