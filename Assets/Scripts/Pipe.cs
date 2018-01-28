@@ -10,6 +10,7 @@ public class Pipe : MonoBehaviour {
     public SpriteRenderer rotatingArt;
     public float rotationDuration;
 
+    private static Pipe firstRandomizer = null;
     private int randomizing;
     private bool rotating;
     private float rotationDegrees;
@@ -32,9 +33,17 @@ public class Pipe : MonoBehaviour {
         }
 
         if (randomizing > 0 && !rotating)
-        {
+        {                        
             rotating = true;
             randomizing--;
+            if (firstRandomizer == this)
+            {
+                Audio.Play(Audio.Sfx.Cog);                
+                if (randomizing == 0)
+                {
+                    firstRandomizer = null;
+                }
+            }
         }
 
         if (rotating)
@@ -53,11 +62,16 @@ public class Pipe : MonoBehaviour {
 
     private void Randomize()
     {
+        if (firstRandomizer == null)
+        {
+            firstRandomizer = this;            
+        }
         randomizing = Mathf.RoundToInt(UnityEngine.Random.Range(0f, averageRandomRotations * 2));
     }
 
     private void OnMouseDown()
     {
-        rotating = true;        
+        rotating = true;
+        Audio.Play(Audio.Sfx.Cog);        
     }
 }
