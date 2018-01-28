@@ -60,14 +60,14 @@ public class Character : MonoBehaviour
 
     void FixedUpdate ()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            currentAction = CharacterAction.Fire;
-        if (Input.GetKeyDown(KeyCode.D))
-            currentAction = CharacterAction.GoRight;
-        if (Input.GetKeyDown(KeyCode.A))
-            currentAction = CharacterAction.GoLeft;
-        if (Input.GetKeyDown(KeyCode.Space))
-            currentAction = CharacterAction.Jump;
+        //if (Input.GetKeyDown(KeyCode.F))
+        //    currentAction = CharacterAction.Fire;
+        //if (Input.GetKeyDown(KeyCode.D))
+        //    currentAction = CharacterAction.GoRight;
+        //if (Input.GetKeyDown(KeyCode.A))
+        //    currentAction = CharacterAction.GoLeft;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    currentAction = CharacterAction.Jump;
 
         ChooseAction(currentAction);
     }

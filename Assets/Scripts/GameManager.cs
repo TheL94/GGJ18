@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToLevel(int _levelNumber)
     {
+        currentLevel = _levelNumber;
         if (_levelNumber == 1)
         {
             SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
         else
             GoToMenu();
 
-        currentLevel = _levelNumber;
     }
 
     public void GoToNextLevel()
