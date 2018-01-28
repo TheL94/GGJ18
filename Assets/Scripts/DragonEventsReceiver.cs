@@ -16,6 +16,8 @@ public class DragonEventsReceiver : MonoBehaviour {
 
     private void StepEvent()
     {       
-        Audio.Play(Audio.Sfx.Footstep);
+        // Non trovavo la chiamata a questa funzione, da correggere se hai voglia
+        if(GetComponentInParent<Character>().currentAction != CharacterAction.Idle)
+            Audio.Play(Audio.Sfx.Footstep);
     }
 }

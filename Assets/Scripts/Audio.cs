@@ -3,22 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Audio : MonoBehaviour {
-
+public class Audio : MonoBehaviour
+{
     public int maxSimultaneousSfxs;
     public AudioSource sfxSource;
     public AudioSource musicSource;
 
     // SFX:
-    public AudioClip test;
     public AudioClip[] footsteps;
-    public AudioClip fire;
-    public AudioClip jump;
+    public AudioClip test;
+    public AudioClip fireBall;
+    public AudioClip roar;
+    public AudioClip jumpStart;
+    public AudioClip jumpEnd;
     public AudioClip crash;
-    public AudioClip lose;
+    public AudioClip wings;
 
     // Music:
     public AudioClip mainTheme;
+    public AudioClip menuTheme;
+    public AudioClip gameOver;
 
     private AudioSource[] sfxSources;
 
@@ -51,7 +55,8 @@ public class Audio : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		if (instance == null)
         {
             instance = this;
@@ -68,7 +73,8 @@ public class Audio : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Audio.Play(Sfx.Test);
@@ -77,7 +83,6 @@ public class Audio : MonoBehaviour {
 
     public void PlaySfx(Sfx sfx)
     {
-
         switch (sfx)
         {
             case Sfx.Test:
@@ -87,23 +92,22 @@ public class Audio : MonoBehaviour {
                 PlaySfx(footsteps, 0.15f);
                 break;
             case Sfx.Fire:
-                PlaySfx(fire);
+                PlaySfx(roar);
                 break;
             case Sfx.Jump:
-                PlaySfx(jump);
+                PlaySfx(jumpStart);
                 break;
             case Sfx.Crash:
                 PlaySfx(crash);
                 break;
             case Sfx.Lose:
-                PlaySfx(lose);
+                PlaySfx(gameOver);
                 break;
         }
     }
 
     public void PlayMusic(Music song)
     {
-
         switch (song)
         {
             case Music.MainTheme:
@@ -146,6 +150,7 @@ public class Audio : MonoBehaviour {
         Test,
         Footstep,
         Fire,
+        Roar,
         Jump,
         Crash,
         Lose

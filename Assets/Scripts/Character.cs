@@ -14,18 +14,16 @@ public class Character : MonoBehaviour
     public float FireTime = 0.5f;
     public float StepNoisePeriod = 0.5f;
 
-    float timer;
-
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer spriteRend;
 
     CharacterAction previousAction;
     CharacterAction _currentAction = CharacterAction.None;
-    CharacterAction currentAction
+    public CharacterAction currentAction
     {
         get { return _currentAction; }
-        set
+        private set
         {
             previousAction = _currentAction;
             _currentAction = value;
@@ -70,6 +68,7 @@ public class Character : MonoBehaviour
             currentAction = CharacterAction.GoLeft;
         if (Input.GetKeyDown(KeyCode.Space))
             currentAction = CharacterAction.Jump;
+
         ChooseAction(currentAction);
     }
 
@@ -108,15 +107,19 @@ public class Character : MonoBehaviour
                 SetFireSpawn(true);
                 break;
         }
-        if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
-        {
-            anim.enabled = true;
-            anim.SetInteger("AnimState", (int)currentAction);
-        }
-        else
-        {
-            anim.enabled = false;
-        }
+
+        //if (currentAction != CharacterAction.Idle && currentAction != CharacterAction.None)
+        //{
+        //    anim.enabled = true;
+        //    anim.SetInteger("AnimState", (int)currentAction);
+        //}
+        //else
+        //{
+        //    anim.enabled = false;
+        //}
+
+        anim.SetInteger("AnimState", (int)currentAction);
+
     }
 
     void Move(int _direction)
@@ -130,7 +133,8 @@ public class Character : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded) {
+        if (isGrounded)
+        {
             Audio.Play(Audio.Sfx.Jump);
             rigid.AddForce(new Vector2(JumpMovementAmount * sideMovement, JumpForce), ForceMode2D.Force);
         }
