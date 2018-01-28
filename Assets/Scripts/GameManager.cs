@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isPlayingMusic)
         {
-            isPlayingMusic = false;
+            isPlayingMusic = true;
             Audio.Play(Audio.Music.MenuTheme);
         }
 
