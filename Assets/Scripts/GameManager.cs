@@ -37,10 +37,17 @@ public class GameManager : MonoBehaviour
 
     public void GoToLevel(int _levelNumber)
     {
-        if(_levelNumber == 1)
+        if (_levelNumber == 1)
         {
             StartCoroutine(WaitToLevel("TutorialScene"));
         }
+        else if (_levelNumber == 2)
+        {
+            StartCoroutine(WaitToLevel("Level1"));
+        }
+        else
+            GoToMenu();
+
         currentLevel = _levelNumber;
     }
 
