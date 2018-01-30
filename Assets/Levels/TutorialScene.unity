@@ -780,10 +780,6 @@ Prefab:
       propertyPath: m_Name
       value: Cannon (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4452583865282682, guid: 81b2fc9a451f1694faed43a69e9db501, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81b2fc9a451f1694faed43a69e9db501, type: 2}
   m_IsPrefabParent: 0
